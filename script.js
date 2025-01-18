@@ -1,4 +1,3 @@
-
 let username = "";
 let userWins = 0;
 let computerWins = 0;
