@@ -1,21 +1,38 @@
 body {
-    background-color: #f7f7f7;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
     font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 500px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 #gameTitle {
     color: #333;
-    text-align: center;
 }
 
-h3 {
+h3, h5 {
     color: #333;
 }
 
 #result {
     font-size: 18px;
-    color: #333;
     font-weight: bold;
+}
+
+.score {
+    font-size: 16px;
 }
 
 #finalWinner {
@@ -25,5 +42,22 @@ h3 {
 
 #congratulationMessage {
     font-size: 18px;
-    color: #666;
+    color: #555;
+}
+
+.choices button {
+    margin: 5px;
+    width: 120px;
+}
+
+.btn-lg {
+    font-size: 20px;
+}
+
+img {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+img:hover {
+    transform: scale(1.1);
 }

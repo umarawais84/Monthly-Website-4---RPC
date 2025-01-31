@@ -3,7 +3,7 @@ let computerScore = 0;
 let roundsPlayed = 0;
 let username = "";
 
-// Randomly select a congratulatory message
+// Random congratulatory messages
 const congratulatoryMessages = [
     "Congratulations, you win! 🎉",
     "Well played! You beat the computer! 👏",
@@ -12,8 +12,8 @@ const congratulatoryMessages = [
 ];
 
 document.getElementById('startButton').addEventListener('click', () => {
-    username = document.getElementById('usernameInput').value;
-    if (username.trim() === "") {
+    username = document.getElementById('usernameInput').value.trim();
+    if (username === "") {
         alert("Please enter your name!");
         return;
     }
@@ -22,16 +22,16 @@ document.getElementById('startButton').addEventListener('click', () => {
     document.getElementById('gameSection').style.display = 'block';
 });
 
-document.getElementById('rock').addEventListener('click', () => playRound('rock'));
-document.getElementById('paper').addEventListener('click', () => playRound('paper'));
-document.getElementById('scissors').addEventListener('click', () => playRound('scissors'));
+document.getElementById('rock').addEventListener('click', () => playRound('Rock'));
+document.getElementById('paper').addEventListener('click', () => playRound('Paper'));
+document.getElementById('scissors').addEventListener('click', () => playRound('Scissors'));
 
 document.getElementById('reset').addEventListener('click', resetGame);
 document.getElementById('newGameButton').addEventListener('click', () => location.reload());
 
 function getComputerChoice() {
-    const choices = ['rock', 'paper', 'scissors'];
-    return choices[Math.floor(Math.random() * 3)];
+    const choices = ['Rock', 'Paper', 'Scissors'];
+    return choices[Math.floor(Math.random() * choices.length)];
 }
 
 function getWinner(userChoice, computerChoice) {
@@ -39,9 +39,9 @@ function getWinner(userChoice, computerChoice) {
         return "It's a tie!";
     }
     if (
-        (userChoice === 'rock' && computerChoice === 'scissors') ||
-        (userChoice === 'paper' && computerChoice === 'rock') ||
-        (userChoice === 'scissors' && computerChoice === 'paper')
+        (userChoice === 'Rock' && computerChoice === 'Scissors') ||
+        (userChoice === 'Paper' && computerChoice === 'Rock') ||
+        (userChoice === 'Scissors' && computerChoice === 'Paper')
     ) {
         userScore++;
         return "You win!";
@@ -59,18 +59,24 @@ function updateScore() {
 function playRound(userChoice) {
     const computerChoice = getComputerChoice();
     const result = getWinner(userChoice, computerChoice);
-    
+
+    // Update images dynamically based on choices
+    document.getElementById('userChoiceImage').src = `images/${userChoice}.png`;
+    document.getElementById('computerChoiceImage').src = `images/${computerChoice}.png`;
+
+    // Update result text
     document.getElementById('result').textContent = `You chose ${userChoice}. Computer chose ${computerChoice}. ${result}`;
-    
+
     roundsPlayed++;
     document.getElementById('roundsPlayed').textContent = roundsPlayed;
 
     updateScore();
-    
+
     if (roundsPlayed >= 5) {
         endGame();
     }
 }
+
 
 function resetGame() {
     userScore = 0;
@@ -78,20 +84,15 @@ function resetGame() {
     roundsPlayed = 0;
     document.getElementById('roundsPlayed').textContent = roundsPlayed;
     document.getElementById('result').textContent = '';
+    document.getElementById('userChoiceText').textContent = '';
+    document.getElementById('computerChoiceText').textContent = '';
     updateScore();
     document.getElementById('gameSection').style.display = 'block';
     document.getElementById('finalResultSection').style.display = 'none';
 }
 
 function endGame() {
-    let winnerMessage = '';
-    if (userScore > computerScore) {
-        winnerMessage = "You are the overall winner!";
-    } else if (computerScore > userScore) {
-        winnerMessage = "Computer wins the game!";
-    } else {
-        winnerMessage = "It's a tie overall!";
-    }
+    let winnerMessage = userScore > computerScore ? "You are the overall winner!" : (computerScore > userScore ? "Computer wins the game!" : "It's a tie overall!");
 
     document.getElementById('finalWinner').textContent = winnerMessage;
     document.getElementById('congratulationMessage').textContent = congratulatoryMessages[Math.floor(Math.random() * congratulatoryMessages.length)];
