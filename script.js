@@ -60,8 +60,8 @@ function playRound(userChoice) {
     const computerChoice = getComputerChoice();
     const result = getWinner(userChoice, computerChoice);
 
-    document.getElementById('userChoiceImage').src = `images/${userChoice}.png`;
-    document.getElementById('computerChoiceImage').src = `images/${computerChoice}.png`;
+    document.getElementById('userChoiceImage').src = `imgs/${userChoice}.png`;
+    document.getElementById('computerChoiceImage').src = `imgs/${computerChoice}.png`;
 
     document.getElementById('result').textContent = `You chose ${userChoice}. Computer chose ${computerChoice}. ${result}`;
 

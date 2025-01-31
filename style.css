@@ -61,3 +61,8 @@ img {
 img:hover {
     transform: scale(1.1);
 }
+
+.choice-img {
+    width: 100px;
+    cursor: pointer;
+}
